@@ -1,0 +1,13 @@
+<ul>
+  <% @stores.each do |store| %>
+  <li>
+    Name: <%= store.name %>
+    <ul>
+      <li>Distance: <%= store.distance %></li>
+      <li>City: <%= store.city %></li>
+      <li>Phone Number: <%= store.phone %></li>
+      <li>Store Type: <%= store.type %></li>
+    </ul>
+  </li>
+  <% end %>
+</ul>
