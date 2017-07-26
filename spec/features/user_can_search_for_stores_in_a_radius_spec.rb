@@ -16,6 +16,7 @@ RSpec.feature "User can search by zipcode" do
       visit '/'
 
       fill_in "search", with: "80202"
+      click_on "Search"
 
       expect(current_path).to eq("/search")
 
