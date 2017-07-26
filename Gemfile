@@ -22,4 +22,5 @@ group :development, :test do
   gem "minitest-rails-capybara"
   gem "pry", :require => "pry"
   gem 'rspec-rails', '~> 3.5'
+  gem 'shoulda-matchers', '~> 3.1'
 end
