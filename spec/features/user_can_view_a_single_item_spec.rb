@@ -1,6 +1,0 @@
-expect(page).to have_content("ID:")
-expect(page).to have_content("Name:")
-expect(page).to have_content("Description:")
-expect(page).to have_content("Image Url:")
-expect(page).to_not have_content("Created")
-expect(page).to_not have_content("Updated")
