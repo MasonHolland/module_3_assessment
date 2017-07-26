@@ -38,8 +38,11 @@ RSpec.describe "User can view an item endpoints" do
       get '/api/v1/items/1'
 
       result = JSON.parse(response.body)
-
       expect(response).to have_http_status(200)
+      expect(result["item"]["id"]).to eq(1)
+      expect(result["item"]["name"]).to eq("Generic Item")
+      expect(result["item"]["description"]).to eq("A generic item")
+      expect(result["item"]["image_url"]).to eq("blah.com")
     end
   end
 
