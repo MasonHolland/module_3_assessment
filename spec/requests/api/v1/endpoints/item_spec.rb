@@ -40,7 +40,7 @@ RSpec.describe "User can view an item endpoints" do
   # I receive a 204 JSON response if the record is successfully deleted
 
   context "when deleting an entry" do
-    it "is not displayed on the index page" do
+    xit "is not displayed on the index page" do
 
       item = Item.last
 
@@ -61,7 +61,7 @@ RSpec.describe "User can view an item endpoints" do
   # And I receive a JSON response containing the id, name, description, and image_url but not the created_at or updated_at
 
   context "when creating an item" do
-    it "returns json containing relevant info" do
+    xit "returns json containing relevant info" do
 
     end
   end
