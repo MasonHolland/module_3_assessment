@@ -15,15 +15,17 @@ RSpec.describe "User can view an item endpoints" do
       get '/api/v1/items'
 
       result = JSON.parse(response.body)
+      result = result["items"]
+
       expect(response).to have_http_status(200)
-      expect(result["items"].first["id"]).to eq(1)
-      expect(result["items"].first["name"]).to eq("Generic Item 1")
-      expect(result["items"].first["description"]).to eq("A generic item 1")
-      expect(result["items"].first["image_url"]).to eq("blah1.com")
-      expect(result["items"].last["id"]).to eq(5)
-      expect(result["items"].last["name"]).to eq("Generic Item 5")
-      expect(result["items"].last["description"]).to eq("A generic item 5")
-      expect(result["items"].last["image_url"]).to eq("blah5.com")
+      expect(result.first["id"]).to eq(1)
+      expect(result.first["name"]).to eq("Generic Item 1")
+      expect(result.first["description"]).to eq("A generic item 1")
+      expect(result.first["image_url"]).to eq("blah1.com")
+      expect(result.last["id"]).to eq(5)
+      expect(result.last["name"]).to eq("Generic Item 5")
+      expect(result.last["description"]).to eq("A generic item 5")
+      expect(result.last["image_url"]).to eq("blah5.com")
     end
   end
 
@@ -38,11 +40,13 @@ RSpec.describe "User can view an item endpoints" do
       get '/api/v1/items/1'
 
       result = JSON.parse(response.body)
+      result = result["item"]
+
       expect(response).to have_http_status(200)
-      expect(result["item"]["id"]).to eq(1)
-      expect(result["item"]["name"]).to eq("Generic Item")
-      expect(result["item"]["description"]).to eq("A generic item")
-      expect(result["item"]["image_url"]).to eq("blah.com")
+      expect(result["id"]).to eq(1)
+      expect(result["name"]).to eq("Generic Item")
+      expect(result["description"]).to eq("A generic item")
+      expect(result["image_url"]).to eq("blah.com")
     end
   end
 
@@ -50,7 +54,12 @@ RSpec.describe "User can view an item endpoints" do
   # I receive a 204 JSON response if the record is successfully deleted
 
   context "when deleting an entry" do
-    xit "is not displayed on the index page" do
+    it "is not displayed on the index page" do
+      i = 1
+      5.times do
+        Item.create(name: "Generic Item #{i}", description: "A generic item #{i}", image_url: "blah#{i}.com")
+        i += 1
+      end
 
       item = Item.last
 
@@ -60,9 +69,10 @@ RSpec.describe "User can view an item endpoints" do
 
       get 'api/v1/items'
 
-      expect(page).to_not have_content(item.id)
-      expect(page).to_not have_content(item.name)
-      expect(page).to_not have_content(item.description)
+      result = JSON.parse(response.body)
+      result = result["items"]
+
+      expect(result.last["name"]).to eq("Generic Item 4")
     end
   end
 

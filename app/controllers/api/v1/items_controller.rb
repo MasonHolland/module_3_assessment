@@ -9,4 +9,10 @@ class Api::V1::ItemsController < ApplicationController
     @items = Item.all
     render json: @items
   end
+
+  def destroy
+    @item = Item.find(params["id"])
+    render json: @item, status: 204
+    @item.delete
+  end
 end
