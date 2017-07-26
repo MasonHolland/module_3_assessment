@@ -1,12 +1,12 @@
 <ul>
   <% @stores.each do |store| %>
   <li>
-    Name: <%= store.name %>
+    Name: <%= store["longName"] %>
     <ul>
-      <li>Distance: <%= store.distance %></li>
-      <li>City: <%= store.city %></li>
-      <li>Phone Number: <%= store.phone %></li>
-      <li>Store Type: <%= store.type %></li>
+      <li>Distance: <%= store["distance"] %></li>
+      <li>City: <%= store["city"] %></li>
+      <li>Phone Number: <%= store["phone"] %></li>
+      <li>Store Type: <%= store["storeType"] %></li>
     </ul>
   </li>
   <% end %>
