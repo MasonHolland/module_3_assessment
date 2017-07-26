@@ -6,8 +6,8 @@ require "rails_helper"
 RSpec.describe "User can view an item endpoints" do
   context "when viewing the items index" do
     it "displays id, name, description and image url for each item" do
+      i = 1
       5.times do
-        i = 1
         Item.create(name: "Generic Item #{i}", description: "A generic item #{i}", image_url: "blah#{i}.com")
         i += 1
       end
@@ -15,7 +15,6 @@ RSpec.describe "User can view an item endpoints" do
       get '/api/v1/items'
 
       result = JSON.parse(response.body)
-
       expect(response).to have_http_status(200)
       expect(result["items"].first["id"]).to eq(1)
       expect(result["items"].first["name"]).to eq("Generic Item 1")
