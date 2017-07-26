@@ -6,18 +6,25 @@ require "rails_helper"
 RSpec.describe "User can view an item endpoints" do
   context "when viewing the items index" do
     it "displays id, name, description and image url for each item" do
+      5.times do
+        i = 1
+        Item.create(name: "Generic Item #{i}", description: "A generic item #{i}", image_url: "blah#{i}.com")
+        i += 1
+      end
 
       get '/api/v1/items'
 
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(200)
-      expect(page).to have_content("ID:")
-      expect(page).to have_content("Name:")
-      expect(page).to have_content("Description:")
-      expect(page).to have_content("Image Url:")
-      expect(page).to_not have_content("Created")
-      expect(page).to_not have_content("Updated")
+      expect(result["items"].first["id"]).to eq(1)
+      expect(result["items"].first["name"]).to eq("Generic Item 1")
+      expect(result["items"].first["description"]).to eq("A generic item 1")
+      expect(result["items"].first["image_url"]).to eq("blah1.com")
+      expect(result["items"].last["id"]).to eq(5)
+      expect(result["items"].last["name"]).to eq("Generic Item 5")
+      expect(result["items"].last["description"]).to eq("A generic item 5")
+      expect(result["items"].last["image_url"]).to eq("blah5.com")
     end
   end
 
@@ -27,6 +34,7 @@ RSpec.describe "User can view an item endpoints" do
 
   context "when viewing a single items page" do
     it "displays id, name, description and image url for the item" do
+      Item.create(name: "Generic Item", description: "A generic item", image_url: "blah.com")
 
       get '/api/v1/items/1'
 
