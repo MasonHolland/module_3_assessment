@@ -15,4 +15,13 @@ class Api::V1::ItemsController < ApplicationController
     render json: { success: "Item successfully deleted", status: 204 }, status: 204
     @item.delete
   end
+
+  def create
+    @item = Item.new
+    @item.name = params["name"]
+    @item.description = params["description"]
+    @item.image_url = params["image_url"]
+    @item.save
+    render json: @item, status: 201
+  end
 end

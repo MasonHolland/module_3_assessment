@@ -81,8 +81,18 @@ RSpec.describe "User can view an item endpoints" do
   # And I receive a JSON response containing the id, name, description, and image_url but not the created_at or updated_at
 
   context "when creating an item" do
-    xit "returns json containing relevant info" do
+    it "returns json containing relevant info" do
 
+      post "api/v1/items?name=Computer&description=Computer of things&image_url=blah.com"
+
+      expect(response).to have_http_status(201)
+
+      result = JSON.parse(response.body)
+      result = result["item"]
+
+      expect(result["name"]).to eq("Computer")
+      expect(result["description"]).to eq("Computer of things")
+      expect(result["image_url"]).to eq("blah.com")
     end
   end
 end
