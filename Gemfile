@@ -15,6 +15,7 @@ gem "minitest-rails"
 gem 'figaro'
 gem 'faraday'
 gem 'active_model_serializers', '~> 0.8.0'
+gem 'will_paginate'
 
 group :development do
   gem "spring"

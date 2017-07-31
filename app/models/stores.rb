@@ -1,11 +1,13 @@
 class Stores
+  attr_reader :details
   def initialize(parsed_json)
     @parsed = parsed_json["stores"]
+    @details = []
   end
 
   def objectify
-    @parsed.each do
-      #damnit!!!!
+    @details = @parsed.map do |store|
+      store
     end
   end
 end
