@@ -27,5 +27,29 @@ RSpec.feature "User can search by zipcode" do
       expect(page).to have_content("Phone Number:")
       expect(page).to have_content("Store Type:")
     end
+
+    # And I should see pagination links below the search results for the number of pages (2 in this case)
+    # And `1` is my current page but isn't a clickable link
+    # And `2` is a clickable link
+    # When I click `2`
+    # Then I should be taken to the next page of search results
+    # Then my current path should be "/search" (ignoring params)
+    # And in the params I should see `page=2`
+    # And I should see stores within 25 miles
+    # And I should see a message that says "17 Total Stores"
+    # And I should see the next 6 results
+    # And I should see the long name, city, distance, phone number and store type for each of the next 6 results
+
+    it "displays the pagination links and displays the correct number of results on the page" do
+      visit '/'
+
+      fill_in "search", with: "80202"
+      click_on "Search"
+
+      expect(page).to have_content("17 Total Stores")
+
+      click_link "2"
+      expect(current_path).to eq('/search/page=2')
+    end
   end
 end
