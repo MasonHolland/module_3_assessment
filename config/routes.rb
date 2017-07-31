@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'search#show'
 
-  get '/search', to: 'search#index'
+  get '/search', to: 'search#index', as: '/search'
 
   namespace :api do
     namespace :v1 do

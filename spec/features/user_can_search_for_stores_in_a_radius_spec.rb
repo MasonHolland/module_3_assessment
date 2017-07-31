@@ -26,6 +26,7 @@ RSpec.feature "User can search by zipcode" do
       expect(page).to have_content("Distance: 3.45")
       expect(page).to have_content("Phone Number: 303-270-9189")
       expect(page).to have_content("Store Type: Mobile SAS")
+      expect(page).to have_selector('.stores', count: 10)
     end
 
     # And I should see pagination links below the search results for the number of pages (2 in this case)
@@ -47,9 +48,10 @@ RSpec.feature "User can search by zipcode" do
       click_on "Search"
 
       expect(page).to have_content("17 Total Stores")
-
-      # click_link "2"
-      # expect(current_path).to eq('/search/page=2')
+      save_and_open_page
+      click_link "2"
+      expect(current_path).to eq('/search/page=2')
+      expect(page).to have_selector('.stores', count: 7)
     end
   end
 end

@@ -1,7 +1,8 @@
+<%= will_paginate @stores %>
 
 <ul>
   <% @stores.each do |store| %>
-  <li>
+  <li class="stores">
     Name: <%= store["longName"] %>
     <ul>
       <li>Distance: <%= store["distance"] %></li>
@@ -12,3 +13,4 @@
   </li>
   <% end %>
 </ul>
+<%= will_paginate @stores %>
