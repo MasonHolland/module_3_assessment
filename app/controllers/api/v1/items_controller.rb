@@ -1,5 +1,5 @@
 class Api::V1::ItemsController < ApplicationController
-
+  protect_from_forgery with: :null_session
   def show
     @item = Item.find(params["id"])
     render json: @item
@@ -17,11 +17,14 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new
-    @item.name = params["name"]
-    @item.description = params["description"]
-    @item.image_url = params["image_url"]
+    @item = Item.create!(item_params)
     @item.save
     render json: @item, status: 201
+  end
+
+  private
+
+  def item_params
+    params.permit(:name, :description, :image_url)
   end
 end
