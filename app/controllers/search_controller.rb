@@ -2,8 +2,8 @@ class SearchController < ApplicationController
   def index
     parsed = StoreService.new(params[:search]).zip_search
     @stores = Stores.new(parsed).objectify
+    @stores = Stores.paginate(:page => params[:page], :per_page => 10)
     flash[:success] = "#{parsed["total"]} Total Stores"
-    # Stores.paginate(:page => params[:page], :per_page => 10)
   end
 end
 
